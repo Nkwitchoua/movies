@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Main from "./pages/Main";
+import Movies from "./pages/Movies";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AddMovie from "./pages/AddMovie";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify"
+import Details from "./pages/Details";
+import EditMovie from "./pages/EditMovie";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main/>} />
+          <Route path="/movies" element={<Movies/>} />
+          <Route path="/add-movie" element={<AddMovie/>} />
+          <Route path="/movies/:movieId" element={<Details/>} />
+          <Route path="/edit-movie/:movieId" element={<EditMovie/>} />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer/>
+    </Provider>
   );
 }
 
